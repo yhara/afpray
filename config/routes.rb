@@ -1,4 +1,11 @@
 Afpray::Application.routes.draw do
+  root :to => "songs#index"
+
+  get "songs/index"
+  get "songs/play"
+  get "songs/pause"
+  get "songs/resume"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
