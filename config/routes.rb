@@ -1,5 +1,5 @@
 Afpray::Application.routes.draw do
-  root :to => "songs#index"
+  root :to => redirect("/songs/index")
 
   get "songs/index"
   get "songs/play"
