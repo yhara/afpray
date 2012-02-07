@@ -7,35 +7,63 @@ class Player
       @ping_url = ping_url
     end
     @queue = []
+    @thread = nil
   end
   attr_reader :queue
 
-  def play_files(list=nil)
-    @queue = list if list
-    stop
-    Thread.new{
-      loop do
-        path = @queue.shift
-        @queue.push path
-        ping!
-        play path, wait: true
-        break if @stopped
-      end
-    }
+  def current
+    @queue.first
   end
-  
+
+  def play_files(list)
+    logger.info "[player] play_files"
+    @queue = list
+    restart_thread
+  end
+
+  def play_wait
+    logger.info "[player] play_wait"
+    _play current
+  end
+
   def pause
     logger.info "[player] pause"
-    @stopped = true
-    stop
+    kill_thread
   end
 
   def resume
     logger.info "[player] resume"
-    play_files
+    restart_thread
+  end
+
+  def prev_song
+    logger.info "[player] prev"
+    @queue.rotate!(-1)
+  end
+  
+  def next_song
+    logger.info "[player] succ"
+    @queue.rotate!
   end
 
   private
+
+  def restart_thread
+    kill_thread
+    @thread = Thread.new{
+      loop do
+        ping!
+        play_wait
+        next_song
+      end
+    }
+  end
+
+  def kill_thread
+    @thread.kill if @thread
+    _stop
+  end
+
 
   # Issue HTTP GET to @ping_url.
   # Used for running afpray with pow,
@@ -54,20 +82,18 @@ class Player
     def initialize(*args)
       super(*args)
       @process = nil
-      @stopped = true
     end
 
-    def play(path, opt={})
+    # Brocking API
+    def _play(path)
       logger.info "[player] play #{path}"
-      @stopped = false
-      stop
       @process = ChildProcess.build("afplay", path)
       @process.io.inherit!
       @process.start
-      @process.wait if opt[:wait]
+      @process.wait
     end
 
-    def stop
+    def _stop
       @process.stop if @process && @process.alive?
     end
 

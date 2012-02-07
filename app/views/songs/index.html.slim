@@ -1,15 +1,17 @@
-div.queue
+#queued
   ' queue:
-  pre= @id
   - @queue.each do |name|
     = name
-    ' /
+    '  ,
 
 
 ul
-  li= link_to "[Play all]", action: :play, dir: @dir 
+  li= link_to "[Play all]", action: :play_all, dir: @dir 
+  li=
+  li= link_to "[Prev]", action: :prev_song
   li= link_to "[Pause]", action: :pause
   li= link_to "[Resume]", action: :resume
+  li= link_to "[Next]", action: :next_song
 
 ul
   - unless @dir == "/"

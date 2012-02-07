@@ -1,10 +1,9 @@
 Afpray::Application.routes.draw do
   root :to => redirect("/songs/index")
 
-  get "songs/index"
-  get "songs/play"
-  get "songs/pause"
-  get "songs/resume"
+  %w(index play_all pause resume prev_song next_song).each do |name|
+    get "songs/#{name}"
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

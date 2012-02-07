@@ -6,28 +6,39 @@ class SongsController < ApplicationController
 
   cattr_accessor :player
 
+  N = 5
   def index
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
-    @id = player.object_id
-    @queue = player.queue.map{|x| x and File.basename(x)}
+    @queue = player.queue.first(N).map{|x| x and File.basename(x)}
+    @queue.push("...") if player.queue.size > N
   end
 
-  def play
+  def play_all
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
-    player.play_files(Dir["#{@dir}/*.mp3"])
+    player.play_files(Dir["#{@dir}/**/*.mp3"])
 
+    redirect_to :back
+  end
+
+  def prev_song
+    player.prev_song
+    player.resume
     redirect_to :back
   end
 
   def pause
     player.pause
-
     redirect_to :back
   end
 
   def resume
     player.resume
+    redirect_to :back
+  end
 
+  def next_song
+    player.next_song
+    player.resume
     redirect_to :back
   end
   
