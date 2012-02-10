@@ -15,7 +15,7 @@ class SongsController < ApplicationController
 
   def play_all
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
-    player.play_files(Dir["#{@dir}/**/*.mp3"])
+    player.play_files(Dir["#{@dir}/**/*.{mp3,m4a}"])
 
     redirect_to :back
   end
