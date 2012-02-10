@@ -1,4 +1,7 @@
 Afpray::Application.configure do
+  # Use SASS instead of SCSS
+  config.sass.preferred_syntax = :sass
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
