@@ -8,6 +8,10 @@ class Player
     end
     @queue = []
     @thread = nil
+
+    at_exit{
+      kill_thread
+    }
   end
   attr_reader :queue
 
