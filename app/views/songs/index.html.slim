@@ -21,4 +21,7 @@ ul
     - if Dir["#{path}/*"].empty?
       li= File.basename(path)
     - else
-      li= link_to File.basename(path), songs_index_path(dir: path)
+      li
+        = link_to File.basename(path), songs_index_path(dir: path)
+        '
+        = link_to "[>]", songs_play_all_path(dir: path)
