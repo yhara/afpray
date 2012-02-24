@@ -25,3 +25,13 @@ ul
         = link_to File.basename(path), songs_index_path(dir: path)
         '
         = link_to "[>]", songs_play_all_path(dir: path)
+
+        - if @expand
+          ul
+            - Dir["#{path}/*"].each do |sub|
+              li
+                = link_to File.basename(sub), songs_index_path(dir: sub)
+                '
+                = link_to "[>]", songs_play_all_path(dir: sub)
+
+
