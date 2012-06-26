@@ -1,0 +1,40 @@
+Afpray
+======
+
+Afpray is a browser-gui wrapper of the afplay command
+installed on Mac.
+
+You can browse your mp3s in browser and play them with afplay.
+
+Requirements
+------------
+
+* afplay
+* Ruby >= 1.9
+
+Install
+=======
+
+Afpray is bulit with Ruby on Rails, but designed to 
+run on your localhost.
+
+* git clone
+* bundle install
+* rails server
+* open http://localhost:3000/
+
+License
+=======
+
+MIT
+
+Icons: http://www.famfamfam.com/lab/icons/silk/
+
+Contact
+=======
+
+https://github.com/yhara/afpray
+
+Yutaka HARA (yhara)
+
+twitter: @yhara_en

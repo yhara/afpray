@@ -6,13 +6,25 @@
 
 
 ul
-  li= link_to "[Play all]", action: :play_all, dir: @dir 
-  li=
-  li= link_to "[Prev]", action: :prev_song
-  li= link_to "[Pause]", action: :pause
-  li= link_to "[Resume]", action: :resume
-  li= link_to "[Next]", action: :next_song
-  li= link_to "[Shuffle]", action: :shuffle
+  li
+    = image_tag "cd_go.png"
+    = link_to "[Play all]", action: :play_all, dir: @dir 
+  li
+  li
+    = image_tag "control_rewind_blue.png"
+    = link_to "[Prev]", action: :prev_song
+  li
+    = image_tag "control_stop_blue.png"
+    = link_to "[Pause]", action: :pause
+  li
+    = image_tag "control_play_blue.png"
+    = link_to "[Resume]", action: :resume
+  li
+    = image_tag "control_fastforward_blue.png"
+    = link_to "[Next]", action: :next_song
+  li
+    = image_tag "arrow_switch.png"
+    = link_to "[Shuffle]", action: :shuffle
 
 // breadcrumbs
 
