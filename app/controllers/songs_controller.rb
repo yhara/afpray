@@ -8,7 +8,7 @@ class SongsController < ApplicationController
 
   N = 5
   def index
-    @expand = params[:expand]
+    @expand = (params[:expand] == "0" ? false : true)
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
     @queue = player.queue.first(N).map{|x| x and File.basename(x)}
     @queue.push("...") if player.queue.size > N
