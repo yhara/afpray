@@ -37,6 +37,11 @@ class SongsController < ApplicationController
     redirect_back_or_index
   end
 
+  def shuffle
+    player.play_files(player.queue.shuffle)
+    redirect_back_or_index
+  end
+
   def next_song
     player.next_song
     player.resume

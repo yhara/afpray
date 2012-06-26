@@ -72,6 +72,8 @@ class Player
   # Issue HTTP GET to @ping_url.
   # Used for running afpray with pow,
   # because pow terminates the app in 15min
+  # This prevents pow to restart afplay
+  # (unless you have a song longer than 15min!).
   def ping!
     if @ping_url
       logger.info("[player] ping #{@ping_url}")
