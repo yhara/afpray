@@ -13,6 +13,12 @@ ul
   li= link_to "[Resume]", action: :resume
   li= link_to "[Next]", action: :next_song
 
+// breadcrumbs
+
+- breadcrumb_paths(@dir).each do |name, path|
+  = link_to name, songs_index_path(dir: path)
+  | /
+
 ul
   - unless @dir == "/"
     li= link_to '..', songs_index_path(dir: File.dirname(@dir))
