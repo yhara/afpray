@@ -18,34 +18,40 @@ class SongsController < ApplicationController
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
     player.play_files(Dir["#{@dir}/**/*.{mp3,m4a}"])
 
-    redirect_to :back
+    redirect_back_or_index
   end
 
   def prev_song
     player.prev_song
     player.resume
-    redirect_to :back
+    redirect_back_or_index
   end
 
   def pause
     player.pause
-    redirect_to :back
+    redirect_back_or_index
   end
 
   def resume
     player.resume
-    redirect_to :back
+    redirect_back_or_index
   end
 
   def next_song
     player.next_song
     player.resume
-    redirect_to :back
+    redirect_back_or_index
   end
   
   private
 
   def player
     SongsController.player ||= Player::AFPlay.new(root_url())
+  end
+
+  def redirect_back_or_index
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to action: index
   end
 end
