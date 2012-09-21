@@ -21,6 +21,13 @@ class SongsController < ApplicationController
     redirect_back_if_possible
   end
 
+  def add
+    @dir = File.expand_path(params[:dir])
+    player.add_files(Dir["#{@dir}/**/*.{mp3,m4a}"])
+
+    redirect_back_if_possible
+  end
+
   def prev_song
     player.prev_song
     player.resume

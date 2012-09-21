@@ -25,6 +25,10 @@ class Player
     restart_thread
   end
 
+  def add_files(list)
+    @queue.concat list
+  end
+
   def play_wait
     logger.info "[player] play_wait"
     _play current

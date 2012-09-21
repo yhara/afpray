@@ -1,7 +1,7 @@
 Afpray::Application.routes.draw do
   root :to => redirect("/songs/index")
 
-  %w(index play_all pause resume shuffle prev_song next_song).each do |name|
+  %w(index play_all add pause resume shuffle prev_song next_song).each do |name|
     get "songs/#{name}"
   end
 
