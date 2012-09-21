@@ -16,14 +16,14 @@ class SongsController < ApplicationController
 
   def play_all
     @dir = File.expand_path(params[:dir] || ROOT_DIR)
-    player.play_files(Dir["#{@dir}/**/*.{mp3,m4a}"])
+    player.play_files(files(@dir))
 
     redirect_back_if_possible
   end
 
   def add
     @dir = File.expand_path(params[:dir])
-    player.add_files(Dir["#{@dir}/**/*.{mp3,m4a}"])
+    player.add_files(files(@dir))
 
     redirect_back_if_possible
   end
@@ -56,6 +56,16 @@ class SongsController < ApplicationController
   end
   
   private
+
+  def files(path)
+    if File.directory?(path)
+      Dir["#{path}/**/*.{mp3,m4a}"]
+    elsif File.exist?(path)
+      [path]
+    else
+      []
+    end
+  end
 
   def player
     SongsController.player ||= Player::AFPlay.new(root_url())
