@@ -38,21 +38,15 @@ ul
 
   - Dir["#{@dir}/*"].each do |path|
     - if Dir["#{path}/*"].empty?
-      li= File.basename(path)
+      li= render "file", path: path
     - else
       li
-        = link_to File.basename(path), songs_index_path(dir: path)
-        '
-        = link_to "[>]", songs_play_all_path(dir: path)
-        = link_to "[+]", songs_add_path(dir: path)
+        = render "file", path: path
 
         - if @expand
           ul
             - Dir["#{path}/*"].each do |sub|
               li
-                = link_to File.basename(sub), songs_index_path(dir: sub)
-                '
-                = link_to "[>]", songs_play_all_path(dir: sub)
-                = link_to "[+]", songs_add_path(dir: sub)
+                = render "file", path: sub
 
 

@@ -1,0 +1,7 @@
+- if File.directory?(path)
+  = link_to File.basename(path), songs_index_path(dir: path)
+- else
+  = File.basename(path)
+' 
+= link_to "[>]", songs_play_all_path(dir: path)
+= link_to "[+]", songs_add_path(dir: path)
