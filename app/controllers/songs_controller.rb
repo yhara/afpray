@@ -2,7 +2,7 @@
 require 'player'
 
 class SongsController < ApplicationController
-  ROOT_DIR = "/Users/yhara/Music/iTunes/iTunes Music/"
+  ROOT_DIR = File.expand_path("~/Music/iTunes/iTunes Media/Music")
 
   cattr_accessor :player
 
