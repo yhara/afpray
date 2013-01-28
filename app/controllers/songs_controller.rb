@@ -53,6 +53,12 @@ class SongsController < ApplicationController
     player.resume
     redirect_back_if_possible
   end
+
+  def set_options
+    session[:options] = params[:options]
+    player.options = params[:options].to_s
+    redirect_back_if_possible
+  end
   
   private
 

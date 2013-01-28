@@ -4,6 +4,7 @@ Afpray::Application.routes.draw do
   %w(index play_all add pause resume shuffle prev_song next_song).each do |name|
     get "songs/#{name}"
   end
+  post "songs/set_options"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

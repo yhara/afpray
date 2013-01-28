@@ -5,6 +5,14 @@
     '  ,
   ' ...
 
+#options
+  = form_tag action: "set_options" do
+    ' options:
+    = text_field_tag :options, session[:options]
+    = submit_tag :save
+    small
+      | (Example: -q 1 -v 0.9 )
+
 ul
   li
     = image_tag "cd_go.png"

@@ -7,6 +7,7 @@ class Player
       @ping_url = ping_url
     end
     @queue = []
+    @options = ""
     @thread = nil
 
     at_exit{
@@ -14,6 +15,7 @@ class Player
     }
   end
   attr_reader :queue
+  attr_writer :options
 
   def current
     @queue.first
@@ -97,7 +99,7 @@ class Player
     # Brocking API
     def _play(path)
       logger.info "[player] play #{path}"
-      @process = ChildProcess.build("afplay", path)
+      @process = ChildProcess.build("afplay", *@options.split, path)
       @process.io.inherit!
       @process.start
       @process.wait
